@@ -1,0 +1,67 @@
+# ═══════════════════════════════════════════════════════════════
+#  settings.toml — Video Analysis Pipeline Configuration
+# ═══════════════════════════════════════════════════════════════
+
+[llm]
+api_url = "https://llm-extract-api-3.aptimeta.com/v1/chat/completions"
+model = "BAI-IVision-SFT-3_2"
+temperature = 0.0
+max_tokens = 2048
+timeout = 120
+
+[whisper]
+model = "large-v2"
+device = "cuda"  # "cuda" or "cpu"
+
+[yolo]
+model_path = "yolov8n.pt"
+start_sec = 0
+end_sec = 5
+
+[dlib]
+model_path = "shape_predictor_68_face_landmarks.dat"
+
+[attention]
+start_sec = 0
+end_sec = -1  # -1 = full video
+output_dir = "attention_output"
+phone_penalty = 25.0
+
+[attention.thresholds]
+ear_blink = 0.25
+gaze_left = 0.35
+gaze_right = 0.65
+gaze_up = 0.35
+gaze_down = 0.65
+yaw = 0.28
+pitch = 0.32
+
+[logging]
+level = "INFO"
+metrics_level = "INFO"
+directory = "./"
+backup_count = 10
+max_bytes = 20000000
+text_log_file = "llm-semantic-engine-text-processing.log"
+metrics_log_file = "llm-semantic-engine-metrics.log"
+
+[api]
+host = "0.0.0.0"
+port = 8000
+workers = 1
+
+[paths]
+captured_faces_dir = "captured_faces"
+captured_faces_lf_dir = "captured_faces_lf"
+attention_output_lf_dir = "attention_output_lf"
+extracted_data_file = "extracted_data.json"
+upload_dir = "/tmp/video_analysis_uploads"
+
+[languages]
+"1" = { name = "English",   code = "en" }
+"2" = { name = "Tamil",     code = "ta" }
+"3" = { name = "Kannada",   code = "kn" }
+"4" = { name = "Malayalam", code = "ml" }
+"5" = { name = "Hindi",     code = "hi" }
+"6" = { name = "Marathi",   code = "mr" }
+"7" = { name = "Telugu",    code = "te" }
